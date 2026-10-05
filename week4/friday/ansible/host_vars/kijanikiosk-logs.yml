@@ -1,0 +1,4 @@
+service_name: kk-logs
+service_user: kk-logs
+service_port: 3002
+env_file: logs.env

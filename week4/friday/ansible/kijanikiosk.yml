@@ -1,0 +1,125 @@
+- import_playbook: dns.yml
+- hosts: kijanikiosk
+  become: true
+  tasks:
+    # phase 1: packages
+    - name: Install packages
+      apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    # phase 2: service accounts
+    - name: Create service group
+      group:
+        name: "{{ service_user }}"
+        system: true
+
+    - name: Create service user
+      user:
+        name: "{{ service_user }}"
+        group: "{{ service_user }}"
+        system: true
+        shell: /usr/sbin/nologin
+        create_home: false
+
+    # phase 3: directories
+    - name: Create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ service_user }}"
+        group: "{{ service_user }}"
+        mode: "0750"
+      loop:
+        - "{{ base_dir }}"
+        - "{{ base_dir }}/config"
+        - "{{ base_dir }}/{{ service_name }}"
+        - "{{ log_dir }}"
+
+    # phase 4: config and systemd unit
+    - name: Deploy env file
+      template:
+        src: service.env.j2
+        dest: "{{ base_dir }}/config/{{ env_file }}"
+        owner: "{{ service_user }}"
+        group: "{{ service_user }}"
+        mode: "0640"
+      notify: restart service
+
+    - name: Deploy unit file
+      template:
+        src: service.unit.j2
+        dest: "/etc/systemd/system/{{ service_name }}.service"
+        mode: "0644"
+      notify:
+        - reload systemd
+        - restart service
+
+    # phase 5: firewall
+    - name: Allow ports
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop: "{{ ufw_ports }}"
+
+    - name: Enable firewall
+      community.general.ufw:
+        state: enabled
+        policy: deny
+
+    # phase 6: journal persistence
+    - name: Create journal directory
+      file:
+        path: /var/log/journal
+        state: directory
+        owner: root
+        group: systemd-journal
+        mode: "2755"
+      notify: restart journald
+
+    - name: Create journald config directory
+      file:
+        path: /etc/systemd/journald.conf.d
+        state: directory
+        mode: "0755"
+
+    - name: Deploy journald config
+      template:
+        src: journald.conf.j2
+        dest: /etc/systemd/journald.conf.d/kijanikiosk.conf
+        mode: "0644"
+      notify: restart journald
+
+    # phase 7: logrotate
+    - name: Deploy logrotate config
+      template:
+        src: logrotate.j2
+        dest: /etc/logrotate.d/kijanikiosk
+        mode: "0644"
+
+    - name: Apply pending handlers
+      meta: flush_handlers
+
+    - name: Start service
+      systemd:
+        name: "{{ service_name }}"
+        state: started
+        enabled: true
+
+  handlers:
+    - name: reload systemd
+      systemd:
+        daemon_reload: true
+
+    - name: restart journald
+      systemd:
+        name: systemd-journald
+        state: restarted
+
+    - name: restart service
+      systemd:
+        name: "{{ service_name }}"
+        state: restarted

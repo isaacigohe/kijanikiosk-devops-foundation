@@ -1,0 +1,8 @@
+{{ log_dir }}/*.log {
+    daily
+    rotate {{ log_rotate_days }}
+    compress
+    missingok
+    notifempty
+    create 0640 {{ service_user }} {{ service_user }}
+}
