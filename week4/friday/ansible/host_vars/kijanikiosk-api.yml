@@ -1,0 +1,4 @@
+service_name: kk-api
+service_user: kk-api
+service_port: 3000
+env_file: api.env

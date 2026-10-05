@@ -1,0 +1,37 @@
+- hosts: kijanikiosk
+  become: true
+  tasks:
+    - name: Create resolved config directory
+      file:
+        path: /etc/systemd/resolved.conf.d
+        state: directory
+        mode: "0755"
+
+    - name: Set DNS servers
+      copy:
+        dest: /etc/systemd/resolved.conf.d/dns.conf
+        content: |
+          [Resolve]
+          DNS={{ dns_servers }}
+        owner: root
+        group: root
+        mode: "0644"
+      notify: restart resolved
+
+    - name: Make apt use IPv4 and fail fast
+      copy:
+        dest: /etc/apt/apt.conf.d/99network
+        content: |
+          Acquire::ForceIPv4 "true";
+          Acquire::http::Timeout "20";
+          Acquire::Retries "2";
+        mode: "0644"
+
+    - name: Apply DNS now
+      meta: flush_handlers
+
+  handlers:
+    - name: restart resolved
+      systemd:
+        name: systemd-resolved
+        state: restarted
