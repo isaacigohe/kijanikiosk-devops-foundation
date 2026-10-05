@@ -1,0 +1,220 @@
+[0m[1mmodule.server["logs"].lxd_instance.vm: Refreshing state... [name=kijanikiosk-logs][0m
+[0m[1mmodule.server["payments"].lxd_instance.vm: Refreshing state... [name=kijanikiosk-payments][0m
+[0m[1mmodule.server["api"].lxd_instance.vm: Refreshing state... [name=kijanikiosk-api][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.server["api"].lxd_instance.vm[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "lxd_instance" "vm" {
+      [31m-[0m[0m allow_restart    = false [90m-> null[0m[0m
+      [31m-[0m[0m config           = {
+          [31m-[0m[0m "cloud-init.user-data" = <<-EOT
+                #cloud-config
+                ssh_authorized_keys:
+                  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFJuq3+SJF1b06JBhFGl/HQuDKaXxKQP4hTya/fsyb54aBH5K0+m3/cWzu+6GNUaIJDPT1+DAMoj+R9tf0791AIHSwxqfSmgesQvDHLVBEiAPCUqlpWXTCsw187A/3r/o4yFcCg4aEJyAUjNuMuxtdgiB2tMFUOWd+/TjOGxcIIvipttIWVErlpGLHwAQWT/wYFA2MOAgoCsubfd9JmYOjR+L7wNZobP+0XRuPiHiObDVOAjG9Q0sWL1wByVQ+EVzx7Crch51S65yk346m5kC66N2wYMkB7XERKb4ru3H0WV5o8Sza6vIvK7ycsUlXPmyIV49779+IHyrPRh0jXOMPCCvEZAu47CTTkPgcm1GPDe93Bz86GxmhvqThLrX840QpbtXvTTrLGoI91lZOuvH/ryq1srcE1pPDH0OJsiTP57iwLvxGabF+bb0bAgZo0J89l/4Xdl5c2o48F8zRnujcXwku2gEdntupby8JUrOX3YhKPh3ScqzRI/5EO9U8gYIt1X6jO41iGp4rlsI81ke4+aX1eH8fx+ev5YYvixbnuZsyBZoinnODpck3OPYx26uTs+0seJpfDACkaFageRtovSk37XxKgL56Zmxx42fRDkZVSE/9HVcnFDdmM1l8ykjTlOfhAyA2IcPl9fDGGMlCNrrZBuc9h5dY0W0fIBwxZQ== isaac@ISA
+                
+                write_files:
+                  - path: /etc/systemd/resolved.conf.d/dns.conf
+                    content: |
+                      [Resolve]
+                      DNS=8.8.8.8 1.1.1.1
+                runcmd:
+                  - systemctl restart systemd-resolved
+            EOT
+        } [90m-> null[0m[0m
+      [31m-[0m[0m description      = "" [90m-> null[0m[0m
+      [31m-[0m[0m ephemeral        = false [90m-> null[0m[0m
+      [31m-[0m[0m image            = "ubuntu:22.04" [90m-> null[0m[0m
+      [31m-[0m[0m interfaces       = {
+          [31m-[0m[0m "eth0" = {
+              [31m-[0m[0m ips   = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "10.40.224.167" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "global" [90m-> null[0m[0m
+                    },
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "fd42:6a43:930e:ef14:216:3eff:fefc:e64e" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet6" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "global" [90m-> null[0m[0m
+                    },
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "fe80::216:3eff:fefc:e64e" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet6" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "link" [90m-> null[0m[0m
+                    },
+                ] [90m-> null[0m[0m
+              [31m-[0m[0m name  = "eth0" [90m-> null[0m[0m
+              [31m-[0m[0m state = "up" [90m-> null[0m[0m
+              [31m-[0m[0m type  = "broadcast" [90m-> null[0m[0m
+            },
+        } [90m-> null[0m[0m
+      [31m-[0m[0m ipv4_address     = "10.40.224.167" [90m-> null[0m[0m
+      [31m-[0m[0m ipv6_address     = "fd42:6a43:930e:ef14:216:3eff:fefc:e64e" [90m-> null[0m[0m
+      [31m-[0m[0m limits           = {
+          [31m-[0m[0m "cpu"    = "1"
+          [31m-[0m[0m "memory" = "1GiB"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m location         = "" [90m-> null[0m[0m
+      [31m-[0m[0m mac_address      = "00:16:3e:fc:e6:4e" [90m-> null[0m[0m
+      [31m-[0m[0m name             = "kijanikiosk-api" [90m-> null[0m[0m
+      [31m-[0m[0m profiles         = [
+          [31m-[0m[0m "default",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m running          = true [90m-> null[0m[0m
+      [31m-[0m[0m status           = "Running" [90m-> null[0m[0m
+      [31m-[0m[0m type             = "container" [90m-> null[0m[0m
+      [31m-[0m[0m wait_for_network = true [90m-> null[0m[0m
+    }
+
+[1m  # module.server["logs"].lxd_instance.vm[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "lxd_instance" "vm" {
+      [31m-[0m[0m allow_restart    = false [90m-> null[0m[0m
+      [31m-[0m[0m config           = {
+          [31m-[0m[0m "cloud-init.user-data" = <<-EOT
+                #cloud-config
+                ssh_authorized_keys:
+                  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFJuq3+SJF1b06JBhFGl/HQuDKaXxKQP4hTya/fsyb54aBH5K0+m3/cWzu+6GNUaIJDPT1+DAMoj+R9tf0791AIHSwxqfSmgesQvDHLVBEiAPCUqlpWXTCsw187A/3r/o4yFcCg4aEJyAUjNuMuxtdgiB2tMFUOWd+/TjOGxcIIvipttIWVErlpGLHwAQWT/wYFA2MOAgoCsubfd9JmYOjR+L7wNZobP+0XRuPiHiObDVOAjG9Q0sWL1wByVQ+EVzx7Crch51S65yk346m5kC66N2wYMkB7XERKb4ru3H0WV5o8Sza6vIvK7ycsUlXPmyIV49779+IHyrPRh0jXOMPCCvEZAu47CTTkPgcm1GPDe93Bz86GxmhvqThLrX840QpbtXvTTrLGoI91lZOuvH/ryq1srcE1pPDH0OJsiTP57iwLvxGabF+bb0bAgZo0J89l/4Xdl5c2o48F8zRnujcXwku2gEdntupby8JUrOX3YhKPh3ScqzRI/5EO9U8gYIt1X6jO41iGp4rlsI81ke4+aX1eH8fx+ev5YYvixbnuZsyBZoinnODpck3OPYx26uTs+0seJpfDACkaFageRtovSk37XxKgL56Zmxx42fRDkZVSE/9HVcnFDdmM1l8ykjTlOfhAyA2IcPl9fDGGMlCNrrZBuc9h5dY0W0fIBwxZQ== isaac@ISA
+                
+                write_files:
+                  - path: /etc/systemd/resolved.conf.d/dns.conf
+                    content: |
+                      [Resolve]
+                      DNS=8.8.8.8 1.1.1.1
+                runcmd:
+                  - systemctl restart systemd-resolved
+            EOT
+        } [90m-> null[0m[0m
+      [31m-[0m[0m description      = "" [90m-> null[0m[0m
+      [31m-[0m[0m ephemeral        = false [90m-> null[0m[0m
+      [31m-[0m[0m image            = "ubuntu:22.04" [90m-> null[0m[0m
+      [31m-[0m[0m interfaces       = {
+          [31m-[0m[0m "eth0" = {
+              [31m-[0m[0m ips   = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "10.40.224.166" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "global" [90m-> null[0m[0m
+                    },
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "fd42:6a43:930e:ef14:216:3eff:fe95:5781" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet6" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "global" [90m-> null[0m[0m
+                    },
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "fe80::216:3eff:fe95:5781" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet6" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "link" [90m-> null[0m[0m
+                    },
+                ] [90m-> null[0m[0m
+              [31m-[0m[0m name  = "eth0" [90m-> null[0m[0m
+              [31m-[0m[0m state = "up" [90m-> null[0m[0m
+              [31m-[0m[0m type  = "broadcast" [90m-> null[0m[0m
+            },
+        } [90m-> null[0m[0m
+      [31m-[0m[0m ipv4_address     = "10.40.224.166" [90m-> null[0m[0m
+      [31m-[0m[0m ipv6_address     = "fd42:6a43:930e:ef14:216:3eff:fe95:5781" [90m-> null[0m[0m
+      [31m-[0m[0m limits           = {
+          [31m-[0m[0m "cpu"    = "1"
+          [31m-[0m[0m "memory" = "1GiB"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m location         = "" [90m-> null[0m[0m
+      [31m-[0m[0m mac_address      = "00:16:3e:95:57:81" [90m-> null[0m[0m
+      [31m-[0m[0m name             = "kijanikiosk-logs" [90m-> null[0m[0m
+      [31m-[0m[0m profiles         = [
+          [31m-[0m[0m "default",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m running          = true [90m-> null[0m[0m
+      [31m-[0m[0m status           = "Running" [90m-> null[0m[0m
+      [31m-[0m[0m type             = "container" [90m-> null[0m[0m
+      [31m-[0m[0m wait_for_network = true [90m-> null[0m[0m
+    }
+
+[1m  # module.server["payments"].lxd_instance.vm[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "lxd_instance" "vm" {
+      [31m-[0m[0m allow_restart    = false [90m-> null[0m[0m
+      [31m-[0m[0m config           = {
+          [31m-[0m[0m "cloud-init.user-data" = <<-EOT
+                #cloud-config
+                ssh_authorized_keys:
+                  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFJuq3+SJF1b06JBhFGl/HQuDKaXxKQP4hTya/fsyb54aBH5K0+m3/cWzu+6GNUaIJDPT1+DAMoj+R9tf0791AIHSwxqfSmgesQvDHLVBEiAPCUqlpWXTCsw187A/3r/o4yFcCg4aEJyAUjNuMuxtdgiB2tMFUOWd+/TjOGxcIIvipttIWVErlpGLHwAQWT/wYFA2MOAgoCsubfd9JmYOjR+L7wNZobP+0XRuPiHiObDVOAjG9Q0sWL1wByVQ+EVzx7Crch51S65yk346m5kC66N2wYMkB7XERKb4ru3H0WV5o8Sza6vIvK7ycsUlXPmyIV49779+IHyrPRh0jXOMPCCvEZAu47CTTkPgcm1GPDe93Bz86GxmhvqThLrX840QpbtXvTTrLGoI91lZOuvH/ryq1srcE1pPDH0OJsiTP57iwLvxGabF+bb0bAgZo0J89l/4Xdl5c2o48F8zRnujcXwku2gEdntupby8JUrOX3YhKPh3ScqzRI/5EO9U8gYIt1X6jO41iGp4rlsI81ke4+aX1eH8fx+ev5YYvixbnuZsyBZoinnODpck3OPYx26uTs+0seJpfDACkaFageRtovSk37XxKgL56Zmxx42fRDkZVSE/9HVcnFDdmM1l8ykjTlOfhAyA2IcPl9fDGGMlCNrrZBuc9h5dY0W0fIBwxZQ== isaac@ISA
+                
+                write_files:
+                  - path: /etc/systemd/resolved.conf.d/dns.conf
+                    content: |
+                      [Resolve]
+                      DNS=8.8.8.8 1.1.1.1
+                runcmd:
+                  - systemctl restart systemd-resolved
+            EOT
+        } [90m-> null[0m[0m
+      [31m-[0m[0m description      = "" [90m-> null[0m[0m
+      [31m-[0m[0m ephemeral        = false [90m-> null[0m[0m
+      [31m-[0m[0m image            = "ubuntu:22.04" [90m-> null[0m[0m
+      [31m-[0m[0m interfaces       = {
+          [31m-[0m[0m "eth0" = {
+              [31m-[0m[0m ips   = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "10.40.224.171" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "global" [90m-> null[0m[0m
+                    },
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "fd42:6a43:930e:ef14:216:3eff:fe98:d906" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet6" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "global" [90m-> null[0m[0m
+                    },
+                  [31m-[0m[0m {
+                      [31m-[0m[0m address = "fe80::216:3eff:fe98:d906" [90m-> null[0m[0m
+                      [31m-[0m[0m family  = "inet6" [90m-> null[0m[0m
+                      [31m-[0m[0m scope   = "link" [90m-> null[0m[0m
+                    },
+                ] [90m-> null[0m[0m
+              [31m-[0m[0m name  = "eth0" [90m-> null[0m[0m
+              [31m-[0m[0m state = "up" [90m-> null[0m[0m
+              [31m-[0m[0m type  = "broadcast" [90m-> null[0m[0m
+            },
+        } [90m-> null[0m[0m
+      [31m-[0m[0m ipv4_address     = "10.40.224.171" [90m-> null[0m[0m
+      [31m-[0m[0m ipv6_address     = "fd42:6a43:930e:ef14:216:3eff:fe98:d906" [90m-> null[0m[0m
+      [31m-[0m[0m limits           = {
+          [31m-[0m[0m "cpu"    = "1"
+          [31m-[0m[0m "memory" = "1GiB"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m location         = "" [90m-> null[0m[0m
+      [31m-[0m[0m mac_address      = "00:16:3e:98:d9:06" [90m-> null[0m[0m
+      [31m-[0m[0m name             = "kijanikiosk-payments" [90m-> null[0m[0m
+      [31m-[0m[0m profiles         = [
+          [31m-[0m[0m "default",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m running          = true [90m-> null[0m[0m
+      [31m-[0m[0m status           = "Running" [90m-> null[0m[0m
+      [31m-[0m[0m type             = "container" [90m-> null[0m[0m
+      [31m-[0m[0m wait_for_network = true [90m-> null[0m[0m
+    }
+
+[1mPlan:[0m [0m0 to add, 0 to change, 3 to destroy.
+
+Changes to Outputs:
+  [31m-[0m[0m server_ips   = {
+      [31m-[0m[0m api      = "10.40.224.167"
+      [31m-[0m[0m logs     = "10.40.224.166"
+      [31m-[0m[0m payments = "10.40.224.171"
+    } [90m-> null[0m[0m
+  [31m-[0m[0m ssh_commands = {
+      [31m-[0m[0m api      = "ssh -i ~/.ssh/id_rsa ubuntu@10.40.224.167"
+      [31m-[0m[0m logs     = "ssh -i ~/.ssh/id_rsa ubuntu@10.40.224.166"
+      [31m-[0m[0m payments = "ssh -i ~/.ssh/id_rsa ubuntu@10.40.224.171"
+    } [90m-> null[0m[0m
+[0m[1mmodule.server["logs"].lxd_instance.vm: Destroying... [name=kijanikiosk-logs][0m[0m
+[0m[1mmodule.server["payments"].lxd_instance.vm: Destroying... [name=kijanikiosk-payments][0m[0m
+[0m[1mmodule.server["api"].lxd_instance.vm: Destroying... [name=kijanikiosk-api][0m[0m
+[0m[1mmodule.server["api"].lxd_instance.vm: Destruction complete after 5s[0m
+[0m[1mmodule.server["logs"].lxd_instance.vm: Destruction complete after 5s[0m
+[0m[1mmodule.server["payments"].lxd_instance.vm: Destruction complete after 5s[0m
+[0m[1m[32m
+Destroy complete! Resources: 3 destroyed.[0m
