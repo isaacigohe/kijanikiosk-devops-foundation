@@ -79,3 +79,4 @@ In both pipeline logs Ansible stops at the "Install packages" task on freshly bu
 
 ## Limits of the security posture
 
+See the last section of hardening-decisions.md. In short: no monitoring, default storage credentials, no secrets vault, one SSH key for all servers, containers instead of VMs, and a placeholder service instead of the real application.
